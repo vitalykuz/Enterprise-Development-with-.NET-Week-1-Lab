@@ -17,6 +17,7 @@
         Search for contacts by name
     
     Two different kinds of contacts exist. 
+
         Personal contacts have the following attributes:
 
             Name
@@ -53,7 +54,6 @@
      * 
 */
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -63,8 +63,10 @@ namespace Week_1_Address_Book
 {
     class Program
     {
+      
         static void Main(string[] args)
         {
+
         }
     }
 }
