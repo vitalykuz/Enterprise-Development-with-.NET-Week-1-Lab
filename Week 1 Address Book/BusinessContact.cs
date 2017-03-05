@@ -5,5 +5,11 @@
         public string CompanyName { get; set; }
         public string FaxNumber { get; set; }
 
+        public BusinessContact(string name, string phoneNumber, string companyName, string faxNumber) 
+            : base(name, phoneNumber)
+        {
+            CompanyName = companyName;
+            FaxNumber = faxNumber;
+        }
     }
 }

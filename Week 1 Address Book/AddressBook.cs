@@ -23,6 +23,14 @@ namespace Week_1_Address_Book
             }
         }
 
+        public void PrintContact(Contact contact)
+        {
+            Console.WriteLine("Contact name: {0} " +
+                                  "\n Contact Phone Number: {1}",
+                                  contact.Name,
+                                  contact.PhoneNumber);
+        }
+
         public Contact SearchContact(string contactName)
         {
             foreach (var contact in Contacts)
@@ -35,12 +43,17 @@ namespace Week_1_Address_Book
             return null;
         }
 
-        public void DeleteContact(string contactName)
+        public bool DeleteContact(string contactName)
         {
             foreach (var contact in Contacts)
             {
-                
+                if (contact.Name.Equals(contactName))
+                {
+                    Contacts.Remove(contact);
+                    return true;
+                }
             }
+            return false;
         }
     }
 }
