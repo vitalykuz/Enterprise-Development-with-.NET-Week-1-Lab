@@ -56,10 +56,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Week_1_Address_Book
 {
@@ -71,15 +73,18 @@ namespace Week_1_Address_Book
         static void Main(string[] args)
         {
             GenerateData();
-            Menu.StartingGreeting();
+
+            AddressBook.FunWithLinq();
+
+            //Menu.StartingGreeting();
             var userInput = ReadInput();
             while (userInput != "exit")
             {
                 ApplyUserOption(userInput);
                 userInput = ReadInput();
             }
-            
-       
+
+
             Console.Read();
         }
 
@@ -101,9 +106,9 @@ namespace Week_1_Address_Book
                     break;
                 case "edit":
                     break;
-                case "save":
+                case "save":  
                     break;
-                case "load":
+                case "load":                    
                     break;
                 case "show":
                     Menu.ShowMenu();
@@ -117,14 +122,20 @@ namespace Week_1_Address_Book
             }
         }
 
+        
+
         public static void AddContact()
         {
-            Console.WriteLine("What would be the name of the contact");
+            Console.WriteLine("What will be the name of the contact");
             var contactName = Console.ReadLine();
-            Console.WriteLine("What would be the phone number of the contact");
+            Console.WriteLine("What will be the phone number of the contact");
             var phoneNumber = Console.ReadLine();
+            Console.WriteLine("What is the type of the contact?");
+            var contactType = Console.ReadLine();
+            Console.WriteLine("ID?");
+            var id = Console.Read();
 
-            var newContact = new Contact(contactName, phoneNumber);
+            var newContact = new Contact(contactName, phoneNumber, contactType, id);
             AddressBook.AddContact(newContact);
             Console.WriteLine("Contact is added!");
         }
@@ -133,7 +144,7 @@ namespace Week_1_Address_Book
         {
             Console.Write("Name of the contact: ");
             var contactNameFromUser = Console.ReadLine();
-            var contact = AddressBook.SearchContact(contactNameFromUser);
+            var contact = AddressBook.SearchContactWithLINQ(contactNameFromUser);
             if (contact != null)
             {
                 AddressBook.PrintContact(contact);
@@ -171,15 +182,27 @@ namespace Week_1_Address_Book
 
         public static void GenerateData()
         {
-            //creates 3 different contacts
-            var personalContact = new PersonalContact("Tanya", "03-04-114", "Liverpool Road");
-            var businessContact = new BusinessContact("Alexis", "04-118-232", "MadPaws", "986-542");
-            var contact = new Contact("Vova", "853-122");
+            //creates 9 different contacts
+            var personalContact = new PersonalContact("Tanya", "03-04-114", "Liverpool Road", "Personal", 1);
+            var businessContact = new BusinessContact("Alexis", "04-118-232", "MadPaws", "986-542", "Business", 2);
+            var contact = new Contact("Vova", "853-122", "General", 3);
+            var personalContact2 = new PersonalContact("Maxim", "03-04-43234", "Liverpool Road", "Personal", 4);
+            var businessContact2 = new BusinessContact("Ulrich", "04-118-232", "UTS", "986-542", "Business", 5);
+            var contact2 = new Contact("Vanya", "853-122", "General", 6);
+            var personalContact3 = new PersonalContact("Maximilian", "03-04-43234", "Liverpool Road", "Personal", 7);
+            var businessContact3 = new BusinessContact("Lucio Ignasio", "04-11234234-56", "Cafe10", "986-542", "Business", 8);
+            var contact3 = new Contact("Zadrot Davidov", "853-122-32432", "General", 9);
 
             //adds contacts to the Address Book
             AddressBook.AddContact(personalContact);
             AddressBook.AddContact(businessContact);
             AddressBook.AddContact(contact);
+            AddressBook.AddContact(personalContact2);
+            AddressBook.AddContact(businessContact2);
+            AddressBook.AddContact(contact2);
+            AddressBook.AddContact(personalContact3);
+            AddressBook.AddContact(businessContact3);
+            AddressBook.AddContact(contact3);
         }
 
     }

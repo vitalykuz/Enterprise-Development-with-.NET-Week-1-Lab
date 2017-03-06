@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Xml.Serialization;
 
 namespace Week_1_Address_Book
 {
+    [Serializable]
     public class AddressBook
     {
         public List<Contact> Contacts { get; set; } = new List<Contact>();
@@ -31,6 +36,24 @@ namespace Week_1_Address_Book
                                   contact.PhoneNumber);
         }
 
+        public Contact SearchContactWithLINQ(string contactName)
+        {
+            var listOfContacts = from contact in Contacts
+                                 where contact.Name.Equals(contactName)
+                                select contact;
+
+            foreach (var contact in listOfContacts)
+            {
+                if (contact != null)
+                {
+                    return contact;
+                }
+                
+            }
+
+            return null;
+        }
+
         public Contact SearchContact(string contactName)
         {
             foreach (var contact in Contacts)
@@ -55,5 +78,21 @@ namespace Week_1_Address_Book
             }
             return false;
         }
+
+        public void FunWithLinq()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+
+            var contacts = from contact in Contacts
+                where contact.Id > 4
+                select contact;
+
+            foreach (var contact in contacts)
+            {
+                stringBuilder.Append(contact.Name + Environment.NewLine);
+            }
+            Console.WriteLine(stringBuilder.ToString());
+        }
+
     }
 }
