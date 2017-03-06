@@ -66,8 +66,28 @@ namespace Week_1_Address_Book
             return null;
         }
 
+        public bool DeleteContactWithLinq(string contactName)
+        {
+
+            var listOfContacts = from contact in Contacts
+                                 where contact.Name.Equals(contactName)
+                                 select contact;
+
+            foreach (var contact in listOfContacts)
+            {
+                if (contact != null)
+                {
+                    Contacts.Remove(contact);
+                    return true;
+                }
+
+            }
+            return false;
+        }
+
         public bool DeleteContact(string contactName)
         {
+
             foreach (var contact in Contacts)
             {
                 if (contact.Name.Equals(contactName))
@@ -94,5 +114,24 @@ namespace Week_1_Address_Book
             Console.WriteLine(stringBuilder.ToString());
         }
 
+
+        public void Edit()
+        {
+            Console.Write("Please type the name of the contact you want to edit: ");
+            var contactName = Console.ReadLine();
+
+            var contact = SearchContactWithLINQ(contactName);
+
+            if (contact != null)
+            {
+                Console.Write("Please type a new name: ");
+                contact.Name = Console.ReadLine();
+                Console.Write("Successfully changed the name!");
+            }
+            else
+            {
+                Console.WriteLine("No such client");
+            }
+        }
     }
 }

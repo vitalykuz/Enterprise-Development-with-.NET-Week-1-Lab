@@ -105,6 +105,7 @@ namespace Week_1_Address_Book
                     DeleteContact();
                     break;
                 case "edit":
+                    AddressBook.Edit();
                     break;
                 case "save":  
                     break;
@@ -121,6 +122,7 @@ namespace Week_1_Address_Book
                     break;                                   
             }
         }
+
 
         
 
@@ -159,7 +161,7 @@ namespace Week_1_Address_Book
         {
             Console.Write("Name of the contact: ");
             var contactNameFromUser = Console.ReadLine();
-            var isDeleted = AddressBook.DeleteContact(contactNameFromUser);
+            var isDeleted = AddressBook.DeleteContactWithLinq(contactNameFromUser);
             if (isDeleted)
             {
                 Console.WriteLine("Successfully deleted");
